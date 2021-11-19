@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -26,10 +27,14 @@ public class Gui extends javax.swing.JFrame {
     /**
      * Creates new form Gui
      */
-    public Gui() {
-     
+    public Gui() throws ParseException {
+
+        SimpleDateFormat sd = new SimpleDateFormat("dd/MM/yyyy");
 
         this.registros = new ArrayList();
+        registros.add(new Usuarios("Alex", "Zelaya", "Alexis", "1234", (sd.parse("15/12/2004")), Color.blue));
+        registros.add(new Usuarios("Jose", "Girard", "Joset", "1234", (sd.parse("05/05/2003")), Color.green));
+
         initComponents();
     }
 
@@ -57,13 +62,15 @@ public class Gui extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         BotonColorFav = new javax.swing.JButton();
         FechaNacimiento = new javax.swing.JTextField();
+        ErrorUsername = new javax.swing.JDialog();
+        BotonCerrarUsername = new javax.swing.JToggleButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         TextoUsername = new javax.swing.JTextField();
         TextoPassWord = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        BotonLogin = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         BotonRegistrar = new javax.swing.JButton();
 
@@ -121,33 +128,33 @@ public class Gui extends javax.swing.JFrame {
                         .addComponent(Registrarse)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(RegistrarLayout.createSequentialGroup()
-                .addGap(45, 45, 45)
+                .addGap(31, 31, 31)
                 .addGroup(RegistrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(RegistrarLayout.createSequentialGroup()
-                        .addGroup(RegistrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel8)
-                            .addComponent(TextNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
-                            .addComponent(TextPassword))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(RegistrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel11)
-                            .addComponent(TextUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
-                            .addComponent(TextApellido))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(RegistrarLayout.createSequentialGroup()
-                        .addGroup(RegistrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(RegistrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(BotonColorFav)
                             .addComponent(jLabel10))
+                        .addGap(37, 37, 37)
                         .addGroup(RegistrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(RegistrarLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
-                                .addComponent(jLabel9))
-                            .addGroup(RegistrarLayout.createSequentialGroup()
-                                .addGap(23, 23, 23)
-                                .addComponent(FechaNacimiento)))
-                        .addGap(28, 28, 28))))
+                                .addComponent(jLabel9)
+                                .addGap(0, 14, Short.MAX_VALUE))
+                            .addComponent(FechaNacimiento))
+                        .addGap(28, 28, 28))
+                    .addGroup(RegistrarLayout.createSequentialGroup()
+                        .addGroup(RegistrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addComponent(TextPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TextNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))
+                        .addGap(53, 53, 53)
+                        .addGroup(RegistrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel11)
+                            .addGroup(RegistrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(TextApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(TextUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         RegistrarLayout.setVerticalGroup(
             RegistrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -157,24 +164,24 @@ public class Gui extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(RegistrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(RegistrarLayout.createSequentialGroup()
-                        .addComponent(jLabel6)
+                        .addGroup(RegistrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel11))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(TextNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(RegistrarLayout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addGap(18, 18, 18)
+                        .addGap(38, 38, 38)
                         .addComponent(TextApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(34, 34, 34)
                 .addGroup(RegistrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RegistrarLayout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addGap(51, 51, 51))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RegistrarLayout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(RegistrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(TextUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TextPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel7))
+                        .addGap(51, 51, 51))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RegistrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(TextUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(TextPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(10, 10, 10)
                 .addGroup(RegistrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -186,6 +193,30 @@ public class Gui extends javax.swing.JFrame {
                 .addGap(61, 61, 61)
                 .addComponent(Registrarse)
                 .addContainerGap(37, Short.MAX_VALUE))
+        );
+
+        BotonCerrarUsername.setText("El nombre de usuario ya existe");
+        BotonCerrarUsername.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonCerrarUsernameActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout ErrorUsernameLayout = new javax.swing.GroupLayout(ErrorUsername.getContentPane());
+        ErrorUsername.getContentPane().setLayout(ErrorUsernameLayout);
+        ErrorUsernameLayout.setHorizontalGroup(
+            ErrorUsernameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ErrorUsernameLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(BotonCerrarUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(44, Short.MAX_VALUE))
+        );
+        ErrorUsernameLayout.setVerticalGroup(
+            ErrorUsernameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ErrorUsernameLayout.createSequentialGroup()
+                .addGap(75, 75, 75)
+                .addComponent(BotonCerrarUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(71, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -209,15 +240,15 @@ public class Gui extends javax.swing.JFrame {
 
         jLabel3.setText("Password:");
 
-        jButton1.setText("Login");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        BotonLogin.setText("Login");
+        BotonLogin.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                BotonLoginMouseClicked(evt);
             }
         });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        BotonLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                BotonLoginActionPerformed(evt);
             }
         });
 
@@ -240,11 +271,11 @@ public class Gui extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(60, 60, 60)
+                .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(193, 193, 193)
-                        .addComponent(jButton1))
+                        .addComponent(BotonLogin))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(150, 150, 150)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -262,16 +293,16 @@ public class Gui extends javax.swing.JFrame {
                                     .addComponent(jLabel3)
                                     .addGap(46, 46, 46)))
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(TextoPassWord, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
-                                .addComponent(TextoUsername)))))
-                .addContainerGap(71, Short.MAX_VALUE))
+                                .addComponent(TextoPassWord)
+                                .addComponent(TextoUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(41, 41, 41)
+                .addGap(52, 52, 52)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(110, 110, 110)
+                .addGap(99, 99, 99)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TextoUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
@@ -280,7 +311,7 @@ public class Gui extends javax.swing.JFrame {
                     .addComponent(TextoPassWord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addGap(64, 64, 64)
-                .addComponent(jButton1)
+                .addComponent(BotonLogin)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -310,14 +341,19 @@ public class Gui extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TextoPassWordActionPerformed
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+    private void BotonLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonLoginMouseClicked
 
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1MouseClicked
+    }//GEN-LAST:event_BotonLoginMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void BotonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonLoginActionPerformed
+
+        for (Usuarios registro : registros) {
+
+        }
+
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_BotonLoginActionPerformed
 
     private void BotonRegistrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonRegistrarMouseClicked
 
@@ -342,13 +378,9 @@ public class Gui extends javax.swing.JFrame {
 
 // 01/01/2000
         SimpleDateFormat sd = new SimpleDateFormat("dd/MM/yyyy");
-        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate fechaNac = LocalDate.parse(FechaNacimiento.getText(), fmt);
-        LocalDate ahora = LocalDate.now();
-
-        Period periodo = Period.between(fechaNac, ahora);
-        int Edad = periodo.getYears();
-
+if( validarUsername(TextUsername.getText())==false){
+        
+        
         try {
             Date fechaN = (sd.parse(FechaNacimiento.getText()));
 
@@ -360,14 +392,20 @@ public class Gui extends javax.swing.JFrame {
             username = TextUsername.getText();
             Color colore = BotonColorFav.getBackground();
 
-            registros.add(new Usuarios(nombre, apellido, username, password, fechaN, Edad, colore));
+            registros.add(new Usuarios(nombre, apellido, username, password, fechaN, colore));
 
             Registrar.setModal(false);//bloquea la ventana anterior
             Registrar.setVisible(false);
         } catch (ParseException ex) {
             Logger.getLogger(Gui.class.getName()).log(Level.SEVERE, null, ex);
         }
+}else{
 
+                ErrorUsername.pack();// aparece con el tamano de los botones
+        ErrorUsername.setLocationRelativeTo(this);//es para centrar la ventana emergente con la anterior
+        ErrorUsername.setModal(true);//bloquea la ventana anterior
+        ErrorUsername.setVisible(true);
+}
     }//GEN-LAST:event_RegistrarseActionPerformed
 
     private void TextPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextPasswordActionPerformed
@@ -380,6 +418,16 @@ public class Gui extends javax.swing.JFrame {
         BotonColorFav.setBackground(JColorChooser.showDialog(Registrar, "Elije tu color favorito", Color.yellow));
 
     }//GEN-LAST:event_BotonColorFavActionPerformed
+
+    private void BotonCerrarUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonCerrarUsernameActionPerformed
+        // TODO add your handling code here:
+        
+
+        ErrorUsername.setModal(false);//bloquea la ventana anterior
+        ErrorUsername.setVisible(false);
+        
+        
+    }//GEN-LAST:event_BotonCerrarUsernameActionPerformed
 
     /**
      * @param args the command line arguments
@@ -411,14 +459,21 @@ public class Gui extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Gui().setVisible(true);
+                try {
+                    new Gui().setVisible(true);
+                } catch (ParseException ex) {
+                    Logger.getLogger(Gui.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JToggleButton BotonCerrarUsername;
     private javax.swing.JButton BotonColorFav;
+    private javax.swing.JButton BotonLogin;
     private javax.swing.JButton BotonRegistrar;
+    private javax.swing.JDialog ErrorUsername;
     private javax.swing.JTextField FechaNacimiento;
     private javax.swing.JDialog Registrar;
     private javax.swing.JButton Registrarse;
@@ -428,7 +483,6 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JTextField TextUsername;
     private javax.swing.JTextField TextoPassWord;
     private javax.swing.JTextField TextoUsername;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -443,4 +497,24 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 private ArrayList<Usuarios> registros;
-}
+
+   
+
+
+
+
+public boolean validarUsername(String username) {
+
+        for (Usuarios registro : registros) {
+
+            if (registro.getUsename().equals(username)) {
+
+                return true;
+            }
+
+        }
+
+        return false;
+    }
+
+}//final

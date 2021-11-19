@@ -1,6 +1,10 @@
 package Week6;
 
 import java.awt.Color;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 /**
@@ -19,13 +23,13 @@ public class Usuarios {
 
     }
 
-    public Usuarios(String nombre, String apellido, String usename, String password, Date fechaNacimiento, int edad, Color Colore) {
+    public Usuarios(String nombre, String apellido, String usename, String password, Date fechaNacimiento, Color Colore) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.usename = usename;
         this.password = password;
         this.fechaNacimiento = fechaNacimiento;
-        this.edad = edad;
+        setEdad(fechaNacimiento);
         this.Colore = Colore;
     }
 
@@ -73,8 +77,13 @@ public class Usuarios {
         return edad;
     }
 
-    public void setEdad(int edad) {
-        this.edad = edad;
+    public void setEdad(Date FechaNacimiento) {
+
+       int year= FechaNacimiento.getYear();
+       int yearact= new Date().getYear();
+        int Edad =yearact-year;
+
+        this.edad = Edad;
     }
 
     public Color getColore() {
@@ -83,6 +92,30 @@ public class Usuarios {
 
     public void setColore(Color Colore) {
         this.Colore = Colore;
+    }
+
+    public Pokedex getPkdex1() {
+        return Pkdex1;
+    }
+
+    public void setPkdex1(Pokedex Pkdex1) {
+        this.Pkdex1 = Pkdex1;
+    }
+
+    public Pokedex getPkdex2() {
+        return Pkdex2;
+    }
+
+    public void setPkdex2(Pokedex Pkdex2) {
+        this.Pkdex2 = Pkdex2;
+    }
+
+    public Pokedex getPkdex3() {
+        return Pkdex3;
+    }
+
+    public void setPkdex3(Pokedex Pkdex3) {
+        this.Pkdex3 = Pkdex3;
     }
 
     @Override
