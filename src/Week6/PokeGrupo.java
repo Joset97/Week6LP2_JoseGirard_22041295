@@ -20,6 +20,9 @@ public class PokeGrupo {
     private Usuarios Lider= new Usuarios();
     private String Tipo; 
 
+    public PokeGrupo() {
+    }
+    
     public PokeGrupo(String nombre,String Tipo, Usuarios Lider) {
         this.nombre = nombre;
         this.Miembros =new ArrayList();
@@ -68,5 +71,10 @@ public class PokeGrupo {
         this.Tipo = Tipo;
     }
     
+    public void agregarUsuario(){
     
+    
+        
+        
+    }
 }

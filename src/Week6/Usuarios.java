@@ -1,22 +1,22 @@
-
 package Week6;
 
 import java.awt.Color;
 import java.util.Date;
-
 
 /**
  *
  * @author jrgir
  */
 public class Usuarios {
-    
-private String nombre, apellido, usename, password;
-private Date fechaNacimiento;
-private int edad;
-private Color Colore;
+
+    private String nombre, apellido, usename, password;
+    private Date fechaNacimiento;
+    private int edad;
+    private Color Colore;
+    private Pokedex Pkdex1 = new Pokedex(), Pkdex2 = new Pokedex(), Pkdex3 = new Pokedex();
 
     public Usuarios() {
+
     }
 
     public Usuarios(String nombre, String apellido, String usename, String password, Date fechaNacimiento, int edad, Color Colore) {
@@ -89,7 +89,5 @@ private Color Colore;
     public String toString() {
         return "Usuarios{" + "\nnombre=" + nombre + ", \napellido=" + apellido + ", \nusename=" + usename + ", \npassword=" + password + ",\nfechaNacimiento=" + fechaNacimiento + ",\n edad=" + edad + ", \nColore=" + Colore + '}';
     }
-
-
 
 }
