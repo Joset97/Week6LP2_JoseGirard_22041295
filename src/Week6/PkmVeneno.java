@@ -9,6 +9,18 @@ package Week6;
  *
  * @author jrgir
  */
-public class PkmVeneno {
+public class PkmVeneno extends Pokemon {
     
+   private String Tipo;
+
+    public PkmVeneno(String nombre, int damage, int vida, int velocidad) {
+        super(nombre, damage, vida, velocidad);
+        this.Tipo = "Veneno";
+    }
+
+    public String getTipo() {
+        return Tipo;
+    }
+    
+   
 }

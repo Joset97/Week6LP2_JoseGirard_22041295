@@ -9,6 +9,14 @@ package Week6;
  *
  * @author jrgir
  */
-public class PkmFantasma {
+public class PkmFantasma extends Pokemon {
+    
+    private String tipo;
+
+    public PkmFantasma(String nombre, int damage, int vida, int velocidad) {
+        super(nombre, damage, vida, velocidad);
+        this.tipo ="Fantasma";
+    }
+    
     
 }

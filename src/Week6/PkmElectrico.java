@@ -9,6 +9,13 @@ package Week6;
  *
  * @author jrgir
  */
-public class PkmElectrico {
-    
+public class PkmElectrico extends Pokemon {
+
+    private String tipo;
+
+    public PkmElectrico(String nombre, int damage, int vida, int velocidad) {
+        super(nombre, damage, vida, velocidad);
+        this.tipo = "Electrico";
+    }
+
 }

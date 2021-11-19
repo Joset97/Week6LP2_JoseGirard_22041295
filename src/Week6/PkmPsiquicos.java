@@ -9,6 +9,18 @@ package Week6;
  *
  * @author jrgir
  */
-public class PkmPsiquicos {
+public class PkmPsiquicos extends Pokemon{
     
+   private String Tipo;
+
+    public PkmPsiquicos(String nombre, int damage, int vida, int velocidad) {
+        super(nombre, damage, vida, velocidad);
+        this.Tipo ="Psiquico";
+    }
+
+    public String getTipo() {
+        return Tipo;
+    }
+    
+   
 }
