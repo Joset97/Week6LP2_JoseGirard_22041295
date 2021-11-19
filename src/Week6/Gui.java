@@ -6,11 +6,17 @@
 package Week6;
 
 import java.awt.Color;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import javax.swing.JColorChooser;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author jrgir
@@ -21,6 +27,8 @@ public class Gui extends javax.swing.JFrame {
      * Creates new form Gui
      */
     public Gui() {
+     
+
         this.registros = new ArrayList();
         initComponents();
     }
@@ -48,7 +56,7 @@ public class Gui extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         BotonColorFav = new javax.swing.JButton();
-        FechaNcimiento = new com.toedter.calendar.JDateChooser();
+        FechaNacimiento = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         TextoUsername = new javax.swing.JTextField();
@@ -80,7 +88,7 @@ public class Gui extends javax.swing.JFrame {
             }
         });
 
-        jLabel9.setText("Fecha (MMM/d/yyyy)");
+        jLabel9.setText("Fecha (dd/mm/yyyy)");
 
         TextPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -132,11 +140,14 @@ public class Gui extends javax.swing.JFrame {
                         .addGroup(RegistrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(BotonColorFav)
                             .addComponent(jLabel10))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                         .addGroup(RegistrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(FechaNcimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9))
-                        .addGap(25, 25, 25))))
+                            .addGroup(RegistrarLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                                .addComponent(jLabel9))
+                            .addGroup(RegistrarLayout.createSequentialGroup()
+                                .addGap(23, 23, 23)
+                                .addComponent(FechaNacimiento)))
+                        .addGap(28, 28, 28))))
         );
         RegistrarLayout.setVerticalGroup(
             RegistrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,9 +180,9 @@ public class Gui extends javax.swing.JFrame {
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(RegistrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(RegistrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BotonColorFav)
-                    .addComponent(FechaNcimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(FechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(61, 61, 61)
                 .addComponent(Registrarse)
                 .addContainerGap(37, Short.MAX_VALUE))
@@ -301,7 +312,6 @@ public class Gui extends javax.swing.JFrame {
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
 
-
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1MouseClicked
 
@@ -314,34 +324,50 @@ public class Gui extends javax.swing.JFrame {
     }//GEN-LAST:event_BotonRegistrarMouseClicked
 
     private void BotonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonRegistrarActionPerformed
+
+        Registrar.pack();// aparece con el tamano de los botones
+        Registrar.setLocationRelativeTo(this);//es para centrar la ventana emergente con la anterior
+        Registrar.setModal(true);//bloquea la ventana anterior
+        Registrar.setVisible(true);
+
         // TODO add your handling code here:
     }//GEN-LAST:event_BotonRegistrarActionPerformed
 
     private void RegistrarseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RegistrarseMouseClicked
 
-     
         // TODO add your handling code here:
     }//GEN-LAST:event_RegistrarseMouseClicked
 
     private void RegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarseActionPerformed
 
-
-
 // 01/01/2000
-DateTimeFormatter fmt = DateTimeFormatter.ofPattern("MMM/d/yyyy");
-LocalDate fechaNac = LocalDate.parse((CharSequence) FechaNcimiento, fmt);
-LocalDate ahora = LocalDate.now();
+        SimpleDateFormat sd = new SimpleDateFormat("dd/MM/yyyy");
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate fechaNac = LocalDate.parse(FechaNacimiento.getText(), fmt);
+        LocalDate ahora = LocalDate.now();
 
-Period periodo = Period.between(fechaNac, ahora);
-System.out.printf("Tu edad es: %s años, %s meses y %s días",
-                    periodo.getYears(), periodo.getMonths(), periodo.getDays());
-      
-        int edad= periodo.getYears();
-        
-        
-        
-        
-        
+        Period periodo = Period.between(fechaNac, ahora);
+        int Edad = periodo.getYears();
+
+        try {
+            Date fechaN = (sd.parse(FechaNacimiento.getText()));
+
+            String nombre, apellido, password, username;
+
+            nombre = TextNombre.getText();
+            apellido = TextApellido.getText();
+            password = TextPassword.getText();
+            username = TextUsername.getText();
+            Color colore = BotonColorFav.getBackground();
+
+            registros.add(new Usuarios(nombre, apellido, username, password, fechaN, Edad, colore));
+
+            Registrar.setModal(false);//bloquea la ventana anterior
+            Registrar.setVisible(false);
+        } catch (ParseException ex) {
+            Logger.getLogger(Gui.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }//GEN-LAST:event_RegistrarseActionPerformed
 
     private void TextPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextPasswordActionPerformed
@@ -350,9 +376,9 @@ System.out.printf("Tu edad es: %s años, %s meses y %s días",
 
     private void BotonColorFavActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonColorFavActionPerformed
         // TODO add your handling code here:
-        
+
         BotonColorFav.setBackground(JColorChooser.showDialog(Registrar, "Elije tu color favorito", Color.yellow));
-        
+
     }//GEN-LAST:event_BotonColorFavActionPerformed
 
     /**
@@ -393,7 +419,7 @@ System.out.printf("Tu edad es: %s años, %s meses y %s días",
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotonColorFav;
     private javax.swing.JButton BotonRegistrar;
-    private com.toedter.calendar.JDateChooser FechaNcimiento;
+    private javax.swing.JTextField FechaNacimiento;
     private javax.swing.JDialog Registrar;
     private javax.swing.JButton Registrarse;
     private javax.swing.JTextField TextApellido;
@@ -416,5 +442,5 @@ System.out.printf("Tu edad es: %s años, %s meses y %s días",
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
-private ArrayList<Usuarios> registros ;
+private ArrayList<Usuarios> registros;
 }
