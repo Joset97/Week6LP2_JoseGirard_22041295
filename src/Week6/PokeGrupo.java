@@ -13,21 +13,21 @@ import java.util.Date;
  * @author jrgir
  */
 public class PokeGrupo {
-    
+
     private String nombre;
-    private ArrayList <Usuarios> Miembros;
+    private ArrayList<Usuarios> Miembros;
     private Date FechaDecracion;
-    private Usuarios Lider= new Usuarios();
-    private String Tipo; 
+    private Usuarios Lider = new Usuarios();
+    private String Tipo;
 
     public PokeGrupo() {
     }
-    
-    public PokeGrupo(String nombre,String Tipo, Usuarios Lider) {
+
+    public PokeGrupo(String nombre, String Tipo, Usuarios Lider) {
         this.nombre = nombre;
-        this.Miembros =new ArrayList();
-        this.FechaDecracion =new Date();
-        this.Lider = Lider;   
+        this.Miembros = new ArrayList();
+        this.FechaDecracion = new Date();
+        this.Lider = Lider;
         this.Tipo = Tipo;
     }
 
@@ -70,11 +70,28 @@ public class PokeGrupo {
     public void setTipo(String Tipo) {
         this.Tipo = Tipo;
     }
-    
-    public void agregarUsuario(){
-    
-    
-        
-        
+
+    public void agregarUsuario(Usuarios user) {
+
+        String nombre = user.getNombre();
+
+        if ((validarUsername(nombre)) == false) {
+            Miembros.add(user);
+
+        }
+    }
+
+    public boolean validarUsername(String username) {
+
+        for (Usuarios Miembro : Miembros) {
+
+            if (Miembro.getUsename().equals(username)) {
+
+                return true;
+            }
+
+        }
+
+        return false;
     }
 }
