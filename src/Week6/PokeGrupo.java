@@ -107,4 +107,10 @@ public class PokeGrupo {
 
         return false;
     }
+
+    @Override
+    public String toString() {
+        return nombre ;
+    }
+    
 }

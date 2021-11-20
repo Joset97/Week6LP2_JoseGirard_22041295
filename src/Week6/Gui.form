@@ -267,7 +267,7 @@
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="1" attributes="0">
                                       <Component id="UnirmeAPokegrupo" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jComboBox1" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="ComboBoxListaPokegrupo" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
@@ -309,7 +309,7 @@
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                                          <Component id="jComboBox1" min="-2" max="-2" attributes="0"/>
+                                          <Component id="ComboBoxListaPokegrupo" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                                           <Component id="UnirmeAPokegrupo" min="-2" max="-2" attributes="0"/>
                                       </Group>
@@ -353,7 +353,7 @@
                     <Property name="text" type="java.lang.String" value="Unirme"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JComboBox" name="jComboBox1">
+                <Component class="javax.swing.JComboBox" name="ComboBoxListaPokegrupo">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="4">
@@ -364,6 +364,9 @@
                       </StringArray>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ComboBoxListaPokegrupoMouseClicked"/>
+                  </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                   </AuxValues>
@@ -560,9 +563,6 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Baja"/>
                   </Properties>
-                  <BindingProperties>
-                    <BindingProperty name="selected" source="buttonGroup1" target="RadioVBaja" targetPath="selected" updateStrategy="0" immediately="false"/>
-                  </BindingProperties>
                 </Component>
                 <Component class="javax.swing.JRadioButton" name="RadioVMedia">
                   <Properties>
@@ -571,9 +571,6 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Media"/>
                   </Properties>
-                  <BindingProperties>
-                    <BindingProperty name="selected" source="buttonGroup1" target="RadioVMedia" targetPath="selected" updateStrategy="0" immediately="false"/>
-                  </BindingProperties>
                 </Component>
                 <Component class="javax.swing.JRadioButton" name="Alta">
                   <Properties>
@@ -582,9 +579,6 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Alta"/>
                   </Properties>
-                  <BindingProperties>
-                    <BindingProperty name="selected" source="buttonGroup1" target="Alta" targetPath="selected" updateStrategy="0" immediately="false"/>
-                  </BindingProperties>
                 </Component>
                 <Component class="javax.swing.JRadioButton" name="RadioTElectrico">
                   <Properties>
@@ -596,9 +590,6 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Electrico"/>
                   </Properties>
-                  <BindingProperties>
-                    <BindingProperty name="selected" source="buttonGroup2" target="RadioTElectrico" targetPath="selected" updateStrategy="0" immediately="false"/>
-                  </BindingProperties>
                 </Component>
                 <Component class="javax.swing.JRadioButton" name="RadioTPsiquico">
                   <Properties>
@@ -610,9 +601,6 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Psiquico"/>
                   </Properties>
-                  <BindingProperties>
-                    <BindingProperty name="selected" source="buttonGroup2" target="RadioTPsiquico" targetPath="selected" updateStrategy="0" immediately="false"/>
-                  </BindingProperties>
                 </Component>
                 <Component class="javax.swing.JRadioButton" name="RadioTVeneno">
                   <Properties>
@@ -624,9 +612,6 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Veneno"/>
                   </Properties>
-                  <BindingProperties>
-                    <BindingProperty name="selected" source="buttonGroup2" target="RadioTVeneno" targetPath="selected" updateStrategy="0" immediately="false"/>
-                  </BindingProperties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RadioTVenenoActionPerformed"/>
                   </Events>
@@ -641,9 +626,6 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Fantasma"/>
                   </Properties>
-                  <BindingProperties>
-                    <BindingProperty name="selected" source="buttonGroup2" target="RadioTFantasma" targetPath="selected" updateStrategy="0" immediately="false"/>
-                  </BindingProperties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel16">
                   <Properties>

@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
 /**
@@ -28,13 +29,15 @@ public class Gui extends javax.swing.JFrame {
      * Creates new form Gui
      */
     public Gui() throws ParseException {
-
+        
         SimpleDateFormat sd = new SimpleDateFormat("dd/MM/yyyy");
-
+        this.grupos = new ArrayList();
         this.registros = new ArrayList();
         registros.add(new Usuarios("Alex", "Zelaya", "Alexis", "1234", (sd.parse("15/12/2004")), Color.blue));
         registros.add(new Usuarios("Jose", "Girard", "Joset", "1234", (sd.parse("05/05/2003")), Color.green));
-
+        
+        grupos.add(new PokeGrupo("PokeLocos", registros.get(0)));
+        grupos.get(0).agregarUsuario(registros.get(1));
         initComponents();
     }
 
@@ -46,7 +49,6 @@ public class Gui extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         Registrar = new javax.swing.JDialog();
         jLabel5 = new javax.swing.JLabel();
@@ -71,7 +73,7 @@ public class Gui extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         UnirmeAPokegrupo = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        ComboBoxListaPokegrupo = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         AreaPokeGrupos = new javax.swing.JTextArea();
         jLabel18 = new javax.swing.JLabel();
@@ -269,7 +271,12 @@ public class Gui extends javax.swing.JFrame {
 
         UnirmeAPokegrupo.setText("Unirme");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        ComboBoxListaPokegrupo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        ComboBoxListaPokegrupo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ComboBoxListaPokegrupoMouseClicked(evt);
+            }
+        });
 
         AreaPokeGrupos.setColumns(20);
         AreaPokeGrupos.setRows(5);
@@ -300,7 +307,7 @@ public class Gui extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(UnirmeAPokegrupo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(ComboBoxListaPokegrupo, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -332,7 +339,7 @@ public class Gui extends javax.swing.JFrame {
                                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(32, 32, 32)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(ComboBoxListaPokegrupo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(28, 28, 28)
                                 .addComponent(UnirmeAPokegrupo)))
                         .addGap(74, 74, 74)
@@ -375,39 +382,20 @@ public class Gui extends javax.swing.JFrame {
         buttonGroup1.add(RadioVBaja);
         RadioVBaja.setText("Baja");
 
-        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, buttonGroup1, org.jdesktop.beansbinding.ObjectProperty.create(), RadioVBaja, org.jdesktop.beansbinding.BeanProperty.create("selected"));
-        bindingGroup.addBinding(binding);
-
         buttonGroup1.add(RadioVMedia);
         RadioVMedia.setText("Media");
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, buttonGroup1, org.jdesktop.beansbinding.ObjectProperty.create(), RadioVMedia, org.jdesktop.beansbinding.BeanProperty.create("selected"));
-        bindingGroup.addBinding(binding);
 
         buttonGroup1.add(Alta);
         Alta.setText("Alta");
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, buttonGroup1, org.jdesktop.beansbinding.ObjectProperty.create(), Alta, org.jdesktop.beansbinding.BeanProperty.create("selected"));
-        bindingGroup.addBinding(binding);
-
         buttonGroup2.add(RadioTElectrico);
         RadioTElectrico.setText("Electrico");
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, buttonGroup2, org.jdesktop.beansbinding.ObjectProperty.create(), RadioTElectrico, org.jdesktop.beansbinding.BeanProperty.create("selected"));
-        bindingGroup.addBinding(binding);
 
         buttonGroup2.add(RadioTPsiquico);
         RadioTPsiquico.setText("Psiquico");
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, buttonGroup2, org.jdesktop.beansbinding.ObjectProperty.create(), RadioTPsiquico, org.jdesktop.beansbinding.BeanProperty.create("selected"));
-        bindingGroup.addBinding(binding);
-
         buttonGroup2.add(RadioTVeneno);
         RadioTVeneno.setText("Veneno");
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, buttonGroup2, org.jdesktop.beansbinding.ObjectProperty.create(), RadioTVeneno, org.jdesktop.beansbinding.BeanProperty.create("selected"));
-        bindingGroup.addBinding(binding);
-
         RadioTVeneno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 RadioTVenenoActionPerformed(evt);
@@ -416,9 +404,6 @@ public class Gui extends javax.swing.JFrame {
 
         buttonGroup2.add(RadioTFantasma);
         RadioTFantasma.setText("Fantasma");
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, buttonGroup2, org.jdesktop.beansbinding.ObjectProperty.create(), RadioTFantasma, org.jdesktop.beansbinding.BeanProperty.create("selected"));
-        bindingGroup.addBinding(binding);
 
         jLabel16.setText("Velocidad");
 
@@ -642,8 +627,6 @@ public class Gui extends javax.swing.JFrame {
             .addComponent(Login, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        bindingGroup.bind();
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -661,18 +644,18 @@ public class Gui extends javax.swing.JFrame {
     }//GEN-LAST:event_BotonLoginMouseClicked
 
     private void BotonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonLoginActionPerformed
-
+        
         for (Usuarios registro : registros) {
-
-            if(registro.getUsename().equals(TextoUsername.getText()) && registro.getPassword().equals(TextoPassWord.getText())){
             
-            LabelNombreDeUsuario.setText(TextoUsername.getText());
-            
-            frameSecundario.pack();
+            if (registro.getUsename().equals(TextoUsername.getText()) && registro.getPassword().equals(TextoPassWord.getText())) {
+                
+                LabelNombreDeUsuario.setText(TextoUsername.getText());
+                
+                frameSecundario.pack();
                 frameSecundario.setLocationRelativeTo(this);//es para centrar la ventana emergente con la anterior
-  
-            frameSecundario.setVisible(true);
-            
+                
+                frameSecundario.setVisible(true);
+                
             }
             
         }
@@ -685,7 +668,7 @@ public class Gui extends javax.swing.JFrame {
     }//GEN-LAST:event_BotonRegistrarMouseClicked
 
     private void BotonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonRegistrarActionPerformed
-
+        
         Registrar.pack();// aparece con el tamano de los botones
         Registrar.setLocationRelativeTo(this);//es para centrar la ventana emergente con la anterior
         Registrar.setModal(true);//bloquea la ventana anterior
@@ -704,27 +687,27 @@ public class Gui extends javax.swing.JFrame {
 // 01/01/2000
         SimpleDateFormat sd = new SimpleDateFormat("dd/MM/yyyy");
         if (validarUsername(TextUsername.getText()) == false) {
-
+            
             try {
                 Date fechaN = (sd.parse(FechaNacimiento.getText()));
-
+                
                 String nombre, apellido, password, username;
-
+                
                 nombre = TextNombre.getText();
                 apellido = TextApellido.getText();
                 password = TextPassword.getText();
                 username = TextUsername.getText();
                 Color colore = BotonColorFav.getBackground();
-
+                
                 registros.add(new Usuarios(nombre, apellido, username, password, fechaN, colore));
-
+                
                 Registrar.setModal(false);//bloquea la ventana anterior
                 Registrar.setVisible(false);
             } catch (ParseException ex) {
                 Logger.getLogger(Gui.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
-
+            
             ErrorUsername.pack();// aparece con el tamano de los botones
             ErrorUsername.setLocationRelativeTo(this);//es para centrar la ventana emergente con la anterior
             ErrorUsername.setModal(true);//bloquea la ventana anterior
@@ -748,7 +731,7 @@ public class Gui extends javax.swing.JFrame {
 
         ErrorUsername.setModal(false);//bloquea la ventana anterior
         ErrorUsername.setVisible(false);
-
+        
 
     }//GEN-LAST:event_BotonCerrarUsernameActionPerformed
 
@@ -775,24 +758,17 @@ public class Gui extends javax.swing.JFrame {
     private void BotonPokegrupoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonPokegrupoActionPerformed
         // TODO add your handling code here:
         
-        grupos.add(new PokeGrupo(TextCrearPokeG.getText(),GetLider(LabelNombreDeUsuario.getText())));
+        grupos.add(new PokeGrupo(TextCrearPokeG.getText(), GetLider(LabelNombreDeUsuario.getText())));
         
     }//GEN-LAST:event_BotonPokegrupoActionPerformed
 
-    private void MostrarPokegrupos(){
-    
-    AreaPokeGrupos.setText(" ");
-    
-        for (PokeGrupo grupo : grupos) {
-            
-            AreaPokeGrupos.setText(grupo.getNombre()+"\n");
-            
-        }
-    
-                
-    }
-    
-    
+    private void ComboBoxListaPokegrupoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ComboBoxListaPokegrupoMouseClicked
+        // TODO add your handling code here:
+        
+        ActualizarComboBox();
+        
+    }//GEN-LAST:event_ComboBoxListaPokegrupoMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -822,6 +798,7 @@ public class Gui extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 try {
                     new Gui().setVisible(true);
@@ -840,6 +817,7 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JButton BotonLogin;
     private javax.swing.JButton BotonPokegrupo;
     private javax.swing.JButton BotonRegistrar;
+    private javax.swing.JComboBox<String> ComboBoxListaPokegrupo;
     private javax.swing.JDialog ErrorUsername;
     private javax.swing.JTextField FechaNacimiento;
     private javax.swing.JLabel LabelNombreDeUsuario;
@@ -868,7 +846,6 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JFrame frameSecundario;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -893,38 +870,59 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTree jTree1;
-    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 private ArrayList<Usuarios> registros;
-private ArrayList<PokeGrupo> grupos;
-
+    private ArrayList<PokeGrupo> grupos;
+    
     public boolean validarUsername(String username) {
-
+        
         for (Usuarios registro : registros) {
-
+            
             if (registro.getUsename().equals(username)) {
-
+                
                 return true;
             }
-
+            
         }
-
+        
         return false;
     }
-
-    public Usuarios GetLider(String username){
     
-             for (Usuarios registro : registros) {
-
+    private Usuarios GetLider(String username) {
+        
+        for (Usuarios registro : registros) {
+            
             if (registro.getUsename().equals(username)) {
-
+                
                 return registro;
             }
-
+            
         }
-
+        
         return null;
-    
+        
     }
+    
+    private void ActualizarComboBox() {
+        
+        DefaultComboBoxModel modelo
+                = (DefaultComboBoxModel) ComboBoxListaPokegrupo.getModel();
+        for (PokeGrupo p : grupos) {
+            modelo.addElement(p.getNombre());
+        }
+        
+    }
+
+    private void MostrarPokegrupos() {
+        
+        AreaPokeGrupos.setText(" ");
+        
+        for (PokeGrupo grupo : grupos) {
+            
+            AreaPokeGrupos.setText(grupo.getNombre() + "\n");
+            
+        }
+        
+    }    
     
 }//final
