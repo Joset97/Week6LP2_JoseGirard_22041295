@@ -18,6 +18,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 
 /**
  *
@@ -29,13 +31,13 @@ public class Gui extends javax.swing.JFrame {
      * Creates new form Gui
      */
     public Gui() throws ParseException {
-        
+
         SimpleDateFormat sd = new SimpleDateFormat("dd/MM/yyyy");
         this.grupos = new ArrayList();
         this.registros = new ArrayList();
         registros.add(new Usuarios("Alex", "Zelaya", "Alexis", "1234", (sd.parse("15/12/2004")), Color.blue));
         registros.add(new Usuarios("Jose", "Girard", "Joset", "1234", (sd.parse("05/05/2003")), Color.green));
-        
+
         grupos.add(new PokeGrupo("PokeLocos", registros.get(0)));
         grupos.get(0).agregarUsuario(registros.get(1));
         initComponents();
@@ -81,7 +83,7 @@ public class Gui extends javax.swing.JFrame {
         BotonPokegrupo = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTree1 = new javax.swing.JTree();
+        ArbolPokedex = new javax.swing.JTree();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -97,10 +99,15 @@ public class Gui extends javax.swing.JFrame {
         RadioTFantasma = new javax.swing.JRadioButton();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
+        BotonEditar = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
         LabelNombreDeUsuario = new javax.swing.JLabel();
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        PopupMostrar = new javax.swing.JMenuItem();
+        PopUpEditar = new javax.swing.JMenuItem();
+        PopUpEliminar = new javax.swing.JMenuItem();
         Login = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         TextoUsername = new javax.swing.JTextField();
@@ -256,6 +263,12 @@ public class Gui extends javax.swing.JFrame {
                 .addContainerGap(71, Short.MAX_VALUE))
         );
 
+        PanePokegrupo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                PanePokegrupoMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -271,10 +284,14 @@ public class Gui extends javax.swing.JFrame {
 
         UnirmeAPokegrupo.setText("Unirme");
 
-        ComboBoxListaPokegrupo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         ComboBoxListaPokegrupo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 ComboBoxListaPokegrupoMouseClicked(evt);
+            }
+        });
+        ComboBoxListaPokegrupo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ComboBoxListaPokegrupoActionPerformed(evt);
             }
         });
 
@@ -321,9 +338,9 @@ public class Gui extends javax.swing.JFrame {
                                 .addGap(11, 11, 11)
                                 .addComponent(BotonPokegrupo)))
                         .addGap(0, 16, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(45, 45, 45)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 474, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -353,7 +370,18 @@ public class Gui extends javax.swing.JFrame {
 
         PanePokegrupo.addTab("PokeGrupo", jPanel1);
 
-        jScrollPane1.setViewportView(jTree1);
+        jPanel3.setComponentPopupMenu(jPopupMenu1);
+
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
+        javax.swing.tree.DefaultMutableTreeNode treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Pokedex1");
+        treeNode1.add(treeNode2);
+        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Pokedex2");
+        treeNode1.add(treeNode2);
+        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Pokedex3");
+        treeNode1.add(treeNode2);
+        ArbolPokedex.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        ArbolPokedex.setComponentPopupMenu(jPopupMenu1);
+        jScrollPane1.setViewportView(ArbolPokedex);
 
         jLabel13.setText("Nombre");
 
@@ -409,6 +437,9 @@ public class Gui extends javax.swing.JFrame {
 
         jLabel17.setText("Tipo");
 
+        BotonEditar.setText("Editar");
+        BotonEditar.setEnabled(false);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -425,7 +456,8 @@ public class Gui extends javax.swing.JFrame {
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel13)
                                     .addComponent(NombrePkm, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel16))
+                                    .addComponent(jLabel16)
+                                    .addComponent(BotonEditar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(34, 34, 34)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel14)
@@ -480,8 +512,13 @@ public class Gui extends javax.swing.JFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Alta)
                             .addComponent(RadioTVeneno))
-                        .addGap(18, 18, 18)
-                        .addComponent(RadioTFantasma))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(RadioTFantasma))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(32, 32, 32)
+                                .addComponent(BotonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(56, 56, 56))
         );
@@ -515,6 +552,15 @@ public class Gui extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(PanePokegrupo))
         );
+
+        PopupMostrar.setText("Mostrar");
+        jPopupMenu1.add(PopupMostrar);
+
+        PopUpEditar.setText("Editar");
+        jPopupMenu1.add(PopUpEditar);
+
+        PopUpEliminar.setText("Eliminar");
+        jPopupMenu1.add(PopUpEliminar);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -644,20 +690,20 @@ public class Gui extends javax.swing.JFrame {
     }//GEN-LAST:event_BotonLoginMouseClicked
 
     private void BotonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonLoginActionPerformed
-        
+
         for (Usuarios registro : registros) {
-            
+
             if (registro.getUsename().equals(TextoUsername.getText()) && registro.getPassword().equals(TextoPassWord.getText())) {
-                
+
                 LabelNombreDeUsuario.setText(TextoUsername.getText());
-                
+
                 frameSecundario.pack();
                 frameSecundario.setLocationRelativeTo(this);//es para centrar la ventana emergente con la anterior
-                
+
                 frameSecundario.setVisible(true);
-                
+
             }
-            
+
         }
 
         // TODO add your handling code here:
@@ -668,7 +714,7 @@ public class Gui extends javax.swing.JFrame {
     }//GEN-LAST:event_BotonRegistrarMouseClicked
 
     private void BotonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonRegistrarActionPerformed
-        
+
         Registrar.pack();// aparece con el tamano de los botones
         Registrar.setLocationRelativeTo(this);//es para centrar la ventana emergente con la anterior
         Registrar.setModal(true);//bloquea la ventana anterior
@@ -687,27 +733,27 @@ public class Gui extends javax.swing.JFrame {
 // 01/01/2000
         SimpleDateFormat sd = new SimpleDateFormat("dd/MM/yyyy");
         if (validarUsername(TextUsername.getText()) == false) {
-            
+
             try {
                 Date fechaN = (sd.parse(FechaNacimiento.getText()));
-                
+
                 String nombre, apellido, password, username;
-                
+
                 nombre = TextNombre.getText();
                 apellido = TextApellido.getText();
                 password = TextPassword.getText();
                 username = TextUsername.getText();
                 Color colore = BotonColorFav.getBackground();
-                
+
                 registros.add(new Usuarios(nombre, apellido, username, password, fechaN, colore));
-                
+
                 Registrar.setModal(false);//bloquea la ventana anterior
                 Registrar.setVisible(false);
             } catch (ParseException ex) {
                 Logger.getLogger(Gui.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
-            
+
             ErrorUsername.pack();// aparece con el tamano de los botones
             ErrorUsername.setLocationRelativeTo(this);//es para centrar la ventana emergente con la anterior
             ErrorUsername.setModal(true);//bloquea la ventana anterior
@@ -731,7 +777,7 @@ public class Gui extends javax.swing.JFrame {
 
         ErrorUsername.setModal(false);//bloquea la ventana anterior
         ErrorUsername.setVisible(false);
-        
+
 
     }//GEN-LAST:event_BotonCerrarUsernameActionPerformed
 
@@ -757,17 +803,37 @@ public class Gui extends javax.swing.JFrame {
 
     private void BotonPokegrupoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonPokegrupoActionPerformed
         // TODO add your handling code here:
-        
+
         grupos.add(new PokeGrupo(TextCrearPokeG.getText(), GetLider(LabelNombreDeUsuario.getText())));
-        
+
     }//GEN-LAST:event_BotonPokegrupoActionPerformed
 
     private void ComboBoxListaPokegrupoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ComboBoxListaPokegrupoMouseClicked
         // TODO add your handling code here:
-        
+
         ActualizarComboBox();
-        
+        MostrarPokegrupos();
     }//GEN-LAST:event_ComboBoxListaPokegrupoMouseClicked
+
+    private void ComboBoxListaPokegrupoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBoxListaPokegrupoActionPerformed
+        // TODO add your handling code here:\
+        MostrarPokegrupos();
+    }//GEN-LAST:event_ComboBoxListaPokegrupoActionPerformed
+
+    private void PanePokegrupoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanePokegrupoMouseClicked
+        // TODO add your handling code here:
+
+        DefaultTreeModel m = (DefaultTreeModel) ArbolPokedex.getModel();
+        DefaultMutableTreeNode raiz
+                = (DefaultMutableTreeNode) m.getRoot();
+        DefaultMutableTreeNode NodoPokedex;
+        NodoPokedex = new DefaultMutableTreeNode(
+                new Pokemon());
+        
+        DefaultMutableTreeNode tipoE;
+        tipoE= new PkmElectrico("pikachu");
+
+    }//GEN-LAST:event_PanePokegrupoMouseClicked
 
     /**
      * @param args the command line arguments
@@ -811,9 +877,11 @@ public class Gui extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton Alta;
+    private javax.swing.JTree ArbolPokedex;
     private javax.swing.JTextArea AreaPokeGrupos;
     private javax.swing.JToggleButton BotonCerrarUsername;
     private javax.swing.JButton BotonColorFav;
+    private javax.swing.JButton BotonEditar;
     private javax.swing.JButton BotonLogin;
     private javax.swing.JButton BotonPokegrupo;
     private javax.swing.JButton BotonRegistrar;
@@ -824,6 +892,9 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JPanel Login;
     private javax.swing.JTextField NombrePkm;
     private javax.swing.JTabbedPane PanePokegrupo;
+    private javax.swing.JMenuItem PopUpEditar;
+    private javax.swing.JMenuItem PopUpEliminar;
+    private javax.swing.JMenuItem PopupMostrar;
     private javax.swing.JRadioButton RadioTElectrico;
     private javax.swing.JRadioButton RadioTFantasma;
     private javax.swing.JRadioButton RadioTPsiquico;
@@ -867,62 +938,64 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTree jTree1;
     // End of variables declaration//GEN-END:variables
 private ArrayList<Usuarios> registros;
     private ArrayList<PokeGrupo> grupos;
-    
+
     public boolean validarUsername(String username) {
-        
+
         for (Usuarios registro : registros) {
-            
+
             if (registro.getUsename().equals(username)) {
-                
+
                 return true;
             }
-            
+
         }
-        
+
         return false;
     }
-    
+
     private Usuarios GetLider(String username) {
-        
+
         for (Usuarios registro : registros) {
-            
+
             if (registro.getUsename().equals(username)) {
-                
+
                 return registro;
             }
-            
+
         }
-        
+
         return null;
-        
+
     }
-    
+
     private void ActualizarComboBox() {
-        
+
         DefaultComboBoxModel modelo
                 = (DefaultComboBoxModel) ComboBoxListaPokegrupo.getModel();
         for (PokeGrupo p : grupos) {
             modelo.addElement(p.getNombre());
         }
-        
+
     }
 
     private void MostrarPokegrupos() {
-        
+
         AreaPokeGrupos.setText(" ");
-        
+
         for (PokeGrupo grupo : grupos) {
-            
-            AreaPokeGrupos.setText(grupo.getNombre() + "\n");
-            
+
+            if (ComboBoxListaPokegrupo.getSelectedItem().equals(grupo)) {
+                AreaPokeGrupos.setText(grupo.getMiembros() + "\n");
+            }
+
         }
-        
-    }    
-    
+
+    }
+
 }//final
