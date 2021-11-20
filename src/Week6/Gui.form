@@ -215,7 +215,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Container class="javax.swing.JFrame" name="jFrame1">
+    <Container class="javax.swing.JFrame" name="frameSecundario">
 
       <Layout>
         <DimensionLayout dim="0">
@@ -273,7 +273,7 @@
                                   <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jTextField1" max="32767" attributes="0"/>
+                                  <Component id="TextCrearPokeG" max="32767" attributes="0"/>
                                   <EmptySpace min="9" pref="9" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
@@ -317,7 +317,7 @@
                                   <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
                                   <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="jTextField1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="TextCrearPokeG" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="BotonPokegrupo" min="-2" pref="43" max="-2" attributes="0"/>
                               </Group>
@@ -388,15 +388,18 @@
                     <Property name="text" type="java.lang.String" value="Crear PokeGrupo"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="jTextField1">
+                <Component class="javax.swing.JTextField" name="TextCrearPokeG">
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField1ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TextCrearPokeGActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="BotonPokegrupo">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Crear PokeGrupo"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BotonPokegrupoActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>

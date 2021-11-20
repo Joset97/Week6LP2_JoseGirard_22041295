@@ -23,12 +23,14 @@ public class PokeGrupo {
     public PokeGrupo() {
     }
 
-    public PokeGrupo(String nombre, String Tipo, Usuarios Lider) {
+    public PokeGrupo(String nombre, Usuarios Lider) {
         this.nombre = nombre;
         this.Miembros = new ArrayList();
         this.FechaDecracion = new Date();
         this.Lider = Lider;
-        this.Tipo = Tipo;
+        this.Tipo =SetTipo();
+        
+        Miembros.add(Lider);
     }
 
     public String getNombre() {
@@ -67,10 +69,6 @@ public class PokeGrupo {
         return Tipo;
     }
 
-    public void setTipo(String Tipo) {
-        this.Tipo = Tipo;
-    }
-
     public void agregarUsuario(Usuarios user) {
 
         String nombre = user.getNombre();
@@ -78,6 +76,21 @@ public class PokeGrupo {
         if ((validarUsername(nombre)) == false) {
             Miembros.add(user);
 
+        }
+    }
+
+    public String SetTipo() {
+
+        if (Miembros.size() <= 3) {
+            return "Novato";
+        }
+
+        if (Miembros.size() >= 4 && Miembros.size() <= 7) {
+
+            return "Verterano";
+        } else {
+
+            return "Legendario";
         }
     }
 

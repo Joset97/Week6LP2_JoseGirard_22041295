@@ -65,7 +65,7 @@ public class Gui extends javax.swing.JFrame {
         FechaNacimiento = new javax.swing.JTextField();
         ErrorUsername = new javax.swing.JDialog();
         BotonCerrarUsername = new javax.swing.JToggleButton();
-        jFrame1 = new javax.swing.JFrame();
+        frameSecundario = new javax.swing.JFrame();
         PanePokegrupo = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -75,7 +75,7 @@ public class Gui extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         AreaPokeGrupos = new javax.swing.JTextArea();
         jLabel18 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        TextCrearPokeG = new javax.swing.JTextField();
         BotonPokegrupo = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -277,13 +277,18 @@ public class Gui extends javax.swing.JFrame {
 
         jLabel18.setText("Crear PokeGrupo");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        TextCrearPokeG.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                TextCrearPokeGActionPerformed(evt);
             }
         });
 
         BotonPokegrupo.setText("Crear PokeGrupo");
+        BotonPokegrupo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonPokegrupoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -299,7 +304,7 @@ public class Gui extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jTextField1)
+                        .addComponent(TextCrearPokeG)
                         .addGap(9, 9, 9))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -333,7 +338,7 @@ public class Gui extends javax.swing.JFrame {
                         .addGap(74, 74, 74)
                         .addComponent(jLabel18)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(TextCrearPokeG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(BotonPokegrupo, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(49, Short.MAX_VALUE))
@@ -503,23 +508,23 @@ public class Gui extends javax.swing.JFrame {
 
         LabelNombreDeUsuario.setText("\"Nombre del usuario\"");
 
-        javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
-        jFrame1.getContentPane().setLayout(jFrame1Layout);
-        jFrame1Layout.setHorizontalGroup(
-            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout frameSecundarioLayout = new javax.swing.GroupLayout(frameSecundario.getContentPane());
+        frameSecundario.getContentPane().setLayout(frameSecundarioLayout);
+        frameSecundarioLayout.setHorizontalGroup(
+            frameSecundarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(PanePokegrupo)
-            .addGroup(jFrame1Layout.createSequentialGroup()
+            .addGroup(frameSecundarioLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(LabelNombreDeUsuario)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jFrame1Layout.setVerticalGroup(
-            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jFrame1Layout.createSequentialGroup()
+        frameSecundarioLayout.setVerticalGroup(
+            frameSecundarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, frameSecundarioLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(frameSecundarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(LabelNombreDeUsuario))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -661,6 +666,12 @@ public class Gui extends javax.swing.JFrame {
 
             if(registro.getUsename().equals(TextoUsername.getText()) && registro.getPassword().equals(TextoPassWord.getText())){
             
+            LabelNombreDeUsuario.setText(TextoUsername.getText());
+            
+            frameSecundario.pack();
+                frameSecundario.setLocationRelativeTo(this);//es para centrar la ventana emergente con la anterior
+  
+            frameSecundario.setVisible(true);
             
             }
             
@@ -757,9 +768,16 @@ public class Gui extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_RadioTVenenoActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void TextCrearPokeGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextCrearPokeGActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_TextCrearPokeGActionPerformed
+
+    private void BotonPokegrupoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonPokegrupoActionPerformed
+        // TODO add your handling code here:
+        
+        grupos.add(new PokeGrupo(TextCrearPokeG.getText(),GetLider(LabelNombreDeUsuario.getText())));
+        
+    }//GEN-LAST:event_BotonPokegrupoActionPerformed
 
     private void MostrarPokegrupos(){
     
@@ -837,6 +855,7 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JDialog Registrar;
     private javax.swing.JButton Registrarse;
     private javax.swing.JTextField TextApellido;
+    private javax.swing.JTextField TextCrearPokeG;
     private javax.swing.JTextField TextDamage;
     private javax.swing.JTextField TextNombre;
     private javax.swing.JTextField TextPassword;
@@ -847,9 +866,9 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JButton UnirmeAPokegrupo;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.JFrame frameSecundario;
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -873,7 +892,6 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTree jTree1;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
@@ -894,4 +912,19 @@ private ArrayList<PokeGrupo> grupos;
         return false;
     }
 
+    public Usuarios GetLider(String username){
+    
+             for (Usuarios registro : registros) {
+
+            if (registro.getUsename().equals(username)) {
+
+                return registro;
+            }
+
+        }
+
+        return null;
+    
+    }
+    
 }//final
